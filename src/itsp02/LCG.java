@@ -33,9 +33,13 @@ public class LCG {
 		this.x0 = x0;
 	}
 
-
+	/*
+	 * Erstellt eine Zufallszahl nach der linearen Kongruenzmethode
+	 * 
+	 */
 	public int nextInt(){
 		//TODO
+		
 		return 0;
 	}
 }
