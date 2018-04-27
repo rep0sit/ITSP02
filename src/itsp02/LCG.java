@@ -24,13 +24,13 @@ public class LCG {
 	}
 	
 	
-	public int getX0() {
+	public int getX() {
 		return x;
 	}
 
 
-	public void setX0(int x0) {
-		this.x = x0;
+	public void setX(int x) {
+		this.x = x;
 	}
 
 	/*
