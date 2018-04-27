@@ -4,14 +4,14 @@
 package itsp02;
 
 /**
- * @author È. Onasch, N. Welker
+ * @author É. Onasch, N. Welker
  *
  */
 public class LCG {
-	private int x0;
+	private int x;
 	
-	public LCG(int x0){
-		this.x0 = x0;
+	public LCG(int x){
+		this.x = x;
 	}
 	
 
@@ -25,12 +25,12 @@ public class LCG {
 	
 	
 	public int getX0() {
-		return x0;
+		return x;
 	}
 
 
 	public void setX0(int x0) {
-		this.x0 = x0;
+		this.x = x0;
 	}
 
 	/*
