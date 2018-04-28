@@ -4,7 +4,8 @@
 package itsp02;
 
 /**
- * @author É. Onasch, N. Welker
+ * @author Etienne Onasch
+ * @author Nelli Welker
  *
  */
 public class LCG {
