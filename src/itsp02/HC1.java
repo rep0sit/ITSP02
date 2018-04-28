@@ -38,24 +38,10 @@ public class HC1 {
 		}
 		
 		
-		Path p = Paths.get(path);
-		String fileName = p.getFileName().toString();
-		String parent = p.getParent().toString();
-		
-		String[] nameAndEnding = fileName.split("\\.");
-		
-		String ending = nameAndEnding.length > 1 ? "." + nameAndEnding[nameAndEnding.length - 1] : "";
-		
-		// Wenn parent einfach nur Laufwerk, dann ist automatisch ein Slash "angefuegt". Sonst nicht!
-		String slash = parent.length() > 3 ? "\\/" : "";
-		
-		
-		String output = parent + slash + fileName + "_HC1" + ending;
-		
-		
 		LCG lcg = new LCG(key);
 		
-		try(InputStream in = new FileInputStream(path); OutputStream out = new FileOutputStream(output)){
+		try(InputStream in = new FileInputStream(path); 
+				OutputStream out = new FileOutputStream(Helpers.createOutputPath(path, "_HC1"))){
 			
 			
 			int nextByte = in.read();
