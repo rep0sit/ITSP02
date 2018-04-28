@@ -1,13 +1,13 @@
 package itsp02;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class LCGTest {
+public class LCGTest {
 
 	@Test
-	void testNextInt() {
+	public void testNextInt() {
 		fail("Not yet implemented");
 	}
 
