@@ -5,5 +5,7 @@ package itsp02;
  *
  */
 public class TripleDES {
-
+	public static void main(String...args) {
+		
+	}
 }
