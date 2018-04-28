@@ -8,7 +8,7 @@ package itsp02;
  * @author Nelli Welker
  *
  */
-public class LCG {
+class LCG {
 	private int x;
 	
 	public LCG(int x){
