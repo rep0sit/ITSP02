@@ -112,7 +112,8 @@ public final class TripleDES {
 				result = new byte[8];
 				tripleDES(currentChiffre, result, crypt);
 				
-				DES.writeBytes(DES.makeLong(result, 0, result.length) ^ DES.makeLong(buffer, 0, buffer.length), currentChiffre, 0, currentChiffre.length);
+				DES.writeBytes(DES.makeLong(result, 0, result.length) ^ DES.makeLong(buffer, 0, buffer.length), 
+						currentChiffre, 0, currentChiffre.length);
 				
 				out.write(currentChiffre);
 			}
