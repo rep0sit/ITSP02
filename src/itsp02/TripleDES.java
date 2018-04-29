@@ -5,9 +5,19 @@ package itsp02;
  *
  */
 public final class TripleDES {
-	private TripleDES() {}
 	
-	private static void encrypt(byte[]key1, byte[]key2, byte[]key3, byte[]source, byte[]target) {
+	private static byte[] key1;
+	private static byte[] key2;
+	private static byte[] key3;
+	
+	
+	private TripleDES() {
+		key1 = new byte[8];
+		key2 = new byte[8];
+		key3 = new byte[8];
+	}
+	
+	private static void encrypt(byte[]source, byte[]target) {
 		DES des1 = new DES(key1);
 		DES des2 = new DES(key2);
 		DES des3 = new DES(key3);
@@ -24,7 +34,7 @@ public final class TripleDES {
 	}
 	
 	
-	private static void decrypt(byte[]key1, byte[]key2, byte[]key3, byte[]source, byte[]target) {
+	private static void decrypt(byte[]source, byte[]target) {
 		DES des1 = new DES(key3);
 		DES des2 = new DES(key2);
 		DES des3 = new DES(key1);
@@ -42,6 +52,7 @@ public final class TripleDES {
 	
 	
 	public static void main(String...args) {
+		
 		
 	}
 	
