@@ -1,4 +1,8 @@
 package itsp02;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
  * @author Etienne Onasch
  * @author Nelli Welker
@@ -58,6 +62,13 @@ public final class TripleDES {
 		String keyFile = args[1];
 		String outFile = args[2];
 		String crypt = args[3];
+		
+		readKeyIVFromFile(keyFile);
+	}
+
+	private static void readKeyIVFromFile(String keyFile) {
+		
+		
 	}
 	
 	
