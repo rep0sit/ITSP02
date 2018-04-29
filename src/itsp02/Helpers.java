@@ -1,5 +1,9 @@
 package itsp02;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -21,4 +25,43 @@ final class Helpers {
 		
 		return parent + slash + fileName + mod + ending;
 	}
+	
+	
+	/**
+	 * 
+	 * This method creates a file where:<br>
+	 * 
+	 * The first 24 Bytes are 3 DES-Keys (3 * 8 Byte);<br>
+	 * Bytes 25 - 32: 8 Bytes for the IV (init vector) for CFB - mode <br>
+	 * 
+	 * @param file fully qualified name of the file that should be created. 
+	 * 
+	 */
+	
+	
+	public static void createKeyFileForTripleDES(String file) {
+		
+		byte [][] keys = {	
+							(new DES()).getKey(),
+							(new DES()).getKey(), 
+							(new DES()).getKey(), 
+							(new DES()).getKey()
+						};
+		
+		
+		try (OutputStream out = new FileOutputStream(file)){
+			
+			for(byte [] b : keys) {
+				out.write(b);
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
