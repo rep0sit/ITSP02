@@ -31,7 +31,7 @@ public class HC1 {
 			
 		}catch(NumberFormatException n) {
 			n.printStackTrace();
-			throw new IllegalArgumentException("The fist value must be an integer value!");
+			throw new IllegalArgumentException("The first value must be an integer value!");
 			
 		}
 		
