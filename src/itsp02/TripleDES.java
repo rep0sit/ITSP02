@@ -1,6 +1,28 @@
 package itsp02;
 
 /**
+ * 
+ * 
+ * A class that encrypts / decrypts a file with the method CFB (Cipher Feedback). <br>
+ * 
+ * 
+ * The encryption function used in it is TripleDES.<br><br>
+ * 
+ * 
+ * <b><u>CFB:</b></u><br><br>
+ * 
+ * C_0 := init_vector<br>
+ * keys := 3 different keys (1 key = 8byte) <br><br>
+ * 
+ * 
+ * TripleDES(C_n, keys) XOR M_n+1 -> Cn+1 <br>
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * @author Etienne Onasch
  * @author Nelli Welker
  *
