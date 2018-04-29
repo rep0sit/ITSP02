@@ -7,6 +7,9 @@ package itsp02;
  */
 public final class TripleDES {
 	
+	private static final String ENCRYPT = "encrypt";
+	private static final String DECRYPT = "decrypt";
+	
 	private static byte[] key1 = new byte[8];
 	private static byte[] key2 = new byte[8];
 	private static byte[] key3 = new byte[8];
@@ -53,13 +56,18 @@ public final class TripleDES {
 		if(args.length != 4) {
 			throw new IllegalArgumentException("Arguments must be: 1. File that should be encrypted,"
 					+ " 2. A keyfile with 3 Keys and one init vector, "
-					+ "3. output file name and 4. \"encrypt\" | \"decrypt\" (w/o marks)");
+					+ "3. output file name and 4. \"" + ENCRYPT + "\" | \"" + DECRYPT + "\" (w/o marks)");
 		}
 
 		String inFile = args[0];
 		String keyFile = args[1];
 		String outFile = args[2];
 		String crypt = args[3];
+		
+		if(!crypt.equals(ENCRYPT) || !crypt.equals(DECRYPT)){
+			throw new IllegalArgumentException("4th argument must be \"encrypt\" or \"decrypt\"");
+		}
+		
 		
 		readKeyIVFromFile(keyFile);
 	}
