@@ -87,7 +87,7 @@ public final class TripleDES {
 		String crypt = args[3];
 		
 		if(!crypt.equals(ENCRYPT) || !crypt.equals(DECRYPT)){
-			throw new IllegalArgumentException("4th argument must be \"encrypt\" or \"decrypt\"");
+			throw new IllegalArgumentException("4th argument must be \""+ ENCRYPT +"\" or \""+ DECRYPT +"\"");
 		}
 		
 		
