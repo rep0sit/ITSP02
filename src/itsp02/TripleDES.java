@@ -1,5 +1,12 @@
 package itsp02;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * 
  * 
@@ -17,12 +24,7 @@ package itsp02;
  * 
  * TripleDES(C_n, keys) XOR M_n+1 -> Cn+1 <br>
  * 
- * 
- * 
- * 
- * 
- * 
- * 
+
  * @author Etienne Onasch
  * @author Nelli Welker
  *
@@ -42,23 +44,10 @@ public final class TripleDES {
 	private TripleDES() {
 	}
 	
-	private static void encrypt(byte[]source, byte[]target) {
-		
-		DES des1 = new DES(key1);
-		DES des2 = new DES(key2);
-		DES des3 = new DES(key3);
-		
-		byte[] first = new byte[8];
-		byte[] second = new byte[8];
-		
-		des1.encrypt(source, 0, first, 0);
-		des2.decrypt(first, 0, second, 0);
-		des3.encrypt(second, 0, target, 0);
-		
-	}
 	
 	
-	private static void decrypt(byte[]source, byte[]target) {
+	
+	private static void tripleDES(byte[]source, byte[]target, String crypt) {
 		
 		DES des1 = new DES(key1);
 		DES des2 = new DES(key2);
@@ -67,9 +56,23 @@ public final class TripleDES {
 		byte[] first = new byte[8]; 
 		byte[] second = new byte[8];
 		
-		des3.decrypt(source, 0, first, 0);
-		des2.encrypt(first, 0, second, 0);
-		des1.decrypt(second, 0, target, 0);
+		if(crypt.equals(ENCRYPT)) {
+			des1.encrypt(source, 0, first, 0);
+			des2.decrypt(first, 0, second, 0);
+			des3.encrypt(second, 0, target, 0);
+		}
+		
+		else if(crypt.equals(DECRYPT)) {
+			
+			des3.decrypt(source, 0, first, 0);
+			des2.encrypt(first, 0, second, 0);
+			des1.decrypt(second, 0, target, 0);
+		}
+		else {
+			throw new IllegalArgumentException("Argument crypt must be \""+ ENCRYPT + "\" or \"" + DECRYPT + "\"");
+		}
+		
+		
 		
 	}
 	
@@ -92,6 +95,40 @@ public final class TripleDES {
 		
 		
 		readKeyIVFromFile(keyFile);
+		
+		
+		
+		// Cipher Feedback
+		byte[] currentChiffre = iv;
+		byte[] result;
+		
+		try(InputStream in = new FileInputStream(inFile); 
+				OutputStream out = new FileOutputStream(outFile)){
+			
+			byte[] buffer = new byte[8];
+			
+			while(in.read(buffer) >= 0) {
+				
+				result = new byte[8];
+				tripleDES(currentChiffre, result, crypt);
+				
+				DES.writeBytes(DES.makeLong(result, 0, result.length) ^ DES.makeLong(buffer, 0, buffer.length), currentChiffre, 0, currentChiffre.length);
+				
+				out.write(currentChiffre);
+			}
+			
+			
+			
+			
+			
+		} catch (FileNotFoundException e) {	
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 	private static void readKeyIVFromFile(String keyFile) {
