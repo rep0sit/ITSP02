@@ -25,6 +25,16 @@ public final class TripleDES {
 	
 	
 	private static void decrypt(byte[]key1, byte[]key2, byte[]key3, byte[]source, byte[]target) {
+		DES des1 = new DES(key3);
+		DES des2 = new DES(key2);
+		DES des3 = new DES(key1);
+		
+		byte[] first = new byte[8];
+		byte[] second = new byte[8];
+		
+		des1.decrypt(source, 0, first, 0);
+		des2.encrypt(first, 0, second, 0);
+		des3.decrypt(second, 0, target, 0);
 		
 	}
 	

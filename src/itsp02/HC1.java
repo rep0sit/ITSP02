@@ -15,7 +15,6 @@ import java.io.OutputStream;
  *
  */
 public class HC1 {
-	
 
 	public static void main(String...args) {
 		int key = 0;
@@ -32,7 +31,7 @@ public class HC1 {
 			
 		}catch(NumberFormatException n) {
 			n.printStackTrace();
-			throw new IllegalArgumentException("The fist value must be an integer value!");
+			throw new IllegalArgumentException("The first value must be an integer value!");
 			
 		}
 		
