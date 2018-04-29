@@ -47,21 +47,29 @@ public final class TripleDES {
 	
 	
 	/**
-	 * Therefore, Triple DES uses a "key bundle" that comprises three DES keys, K1, K2 and K3, each of 56 bits (excluding parity bits). 
-	 * The encryption algorithm is:<br><br><b>
+	 * Therefore, Triple DES uses a "key bundle" that comprises three DES keys, K1,
+	 * K2 and K3, each of 56 bits (excluding parity bits). The encryption algorithm
+	 * is:<br>
+	 * <br>
+	 * <b>
 	 *
-	 *	ciphertext = EK3(DK2(EK1(plaintext))) </b><br><br>
-	 *	
-	 *I.e., DES encrypt with K1, DES decrypt with K2, then DES encrypt with K3.
-     *
-     *	Decryption is the reverse:<br><br><b>
-     *
-	 *	plaintext = DK1(EK2(DK3(ciphertext)))</b> <br><br>
+	 * ciphertext = EK3(DK2(EK1(plaintext))) </b><br>
+	 * <br>
+	 * 
+	 * I.e., DES encrypt with K1, DES decrypt with K2, then DES encrypt with K3.
 	 *
-	 *	I.e., decrypt with K3, encrypt with K2, then decrypt with K1.
-     *
-	 *	Each triple encryption encrypts one block of 64 bits of data.
-	 * @param source
+	 * Decryption is the reverse:<br>
+	 * <br>
+	 * <b>
+	 *
+	 * plaintext = DK1(EK2(DK3(ciphertext)))</b> <br>
+	 * <br>
+	 *
+	 * I.e., decrypt with K3, encrypt with K2, then decrypt with K1.
+	 *
+	 * Each triple encryption encrypts one block of 64 bits of data.
+	 * 
+	 * @param source the current source byte
 	 * @param target
 	 * @param crypt
 	 */
@@ -150,9 +158,25 @@ public final class TripleDES {
 		
 	}
 
+	/**
+	 * Reading key1,key2,key3 and the iv from the keyfile and
+	 * storing intoe the variables.
+	 * 
+	 * @param keyFile
+	 */
 	private static void readKeyIVFromFile(String keyFile) {
-		
-		
+		try {
+			FileInputStream in = new FileInputStream(keyFile);
+			in.read(key1, 1, 8);
+			in.read(key2, 9, 16);
+			in.read(key3, 17, 24);
+			in.read(iv, 25,32);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
