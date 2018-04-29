@@ -46,7 +46,25 @@ public final class TripleDES {
 	
 	
 	
-	
+	/**
+	 * Therefore, Triple DES uses a "key bundle" that comprises three DES keys, K1, K2 and K3, each of 56 bits (excluding parity bits). 
+	 * The encryption algorithm is:<br><br><b>
+	 *
+	 *	ciphertext = EK3(DK2(EK1(plaintext))) </b><br><br>
+	 *	
+	 *I.e., DES encrypt with K1, DES decrypt with K2, then DES encrypt with K3.
+     *
+     *	Decryption is the reverse:<br><br><b>
+     *
+	 *	plaintext = DK1(EK2(DK3(ciphertext)))</b> <br><br>
+	 *
+	 *	I.e., decrypt with K3, encrypt with K2, then decrypt with K1.
+     *
+	 *	Each triple encryption encrypts one block of 64 bits of data.
+	 * @param source
+	 * @param target
+	 * @param crypt
+	 */
 	private static void tripleDES(byte[]source, byte[]target, String crypt) {
 		
 		DES des1 = new DES(key1);
