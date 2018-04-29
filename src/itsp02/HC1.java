@@ -39,6 +39,7 @@ public class HC1 {
 		
 		LCG lcg = new LCG(key);
 		
+		
 		try(InputStream in = new FileInputStream(path); 
 				OutputStream out = new FileOutputStream(Helpers.createOutputPath(path, "_HC1"))){
 			
