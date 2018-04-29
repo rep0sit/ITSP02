@@ -39,8 +39,6 @@ public final class TripleDES {
 	private static byte[] key3 = new byte[8];
 	private static byte[] iv = new byte[8];
 	
-	
-	
 	private TripleDES() {
 	}
 	
