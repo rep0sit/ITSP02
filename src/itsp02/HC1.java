@@ -78,7 +78,7 @@ public class HC1 {
 			int nextByte = in.read();
 			while(nextByte >= 0) {
 				
-				out.write(nextByte ^ sr.nextInt());
+				out.write(nextByte ^ sr.nextInt(key));
 				nextByte = in.read();
 				
 			}

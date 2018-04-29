@@ -113,11 +113,9 @@ public final class TripleDES {
 		String outFile = args[2];
 		String crypt = args[3];
 		
-//		if(!crypt.equals(ENCRYPT) || !crypt.equals(DECRYPT)){
-//			throw new IllegalArgumentException("4th argument must be \""+ ENCRYPT +"\" or \""+ DECRYPT +"\"");
-//		}
-		
-		System.out.println(crypt.equals(ENCRYPT));
+		if(!crypt.equals(ENCRYPT) || !crypt.equals(DECRYPT)){
+			throw new IllegalArgumentException("4th argument must be \""+ ENCRYPT +"\" or \""+ DECRYPT +"\"");
+		}
 		
 		readKeyIVFromFile(keyFile);
 		
