@@ -41,8 +41,13 @@ public final class TripleDES {
 	}
 	
 	public static void main(String...args) {
-		
-		
+
+		if(args.length != 4) {
+			throw new IllegalArgumentException("Arguments must be: 1. File that should be encrypted,"
+					+ " 2. A keyfile with 3 Keys and one init vector, "
+					+ "3. output file name and 4. \"encrypt\" | \"decrypt\" (w/o marks)");
+		}
+
 	}
 	
 	
