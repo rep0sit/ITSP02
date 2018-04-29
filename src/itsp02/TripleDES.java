@@ -4,8 +4,23 @@ package itsp02;
  * @author Nelli Welker
  *
  */
-public class TripleDES {
+public final class TripleDES {
+	private TripleDES() {}
+	
+	private static void encrypt(byte[]key1, byte[]key2, byte[]key3, byte[]iv, byte[]source, byte[]target) {
+		
+	}
+	
+	
+	private static void decrypt(byte[]key1, byte[]key2, byte[]key3, byte[]iv, byte[]source, byte[]target) {
+		
+	}
+	
+	
 	public static void main(String...args) {
 		
 	}
+	
+	
+	
 }
