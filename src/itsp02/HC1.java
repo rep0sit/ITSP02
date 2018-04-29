@@ -36,12 +36,12 @@ public class HC1 {
 			throw new IllegalArgumentException("The first value must be an integer value!");
 			
 		}
-//		encodeHC1(key,path);
-		try {
-			encodeHC1SR(key,path);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
+		encodeHC1(key,path);
+//		try {
+//			encodeHC1SR(key,path);
+//		} catch (NoSuchAlgorithmException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public static void encodeHC1(int key, String path){
