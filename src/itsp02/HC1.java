@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 
 /**
@@ -34,10 +36,17 @@ public class HC1 {
 			throw new IllegalArgumentException("The first value must be an integer value!");
 			
 		}
-		
-		
+//		encodeHC1(key,path);
+		try {
+			encodeHC1SR(key,path);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void encodeHC1(int key, String path){
 		LCG lcg = new LCG(key);
-		
+//		SecureRandom sr = new SecureRandom();
 		
 		try(InputStream in = new FileInputStream(path); 
 				OutputStream out = new FileOutputStream(Helpers.createOutputPath(path, "_HC1"))){
@@ -47,20 +56,37 @@ public class HC1 {
 			while(nextByte >= 0) {
 				
 				out.write(nextByte ^ lcg.nextInt());
+//				out.write(nextByte ^ sr.nextInt());
 				nextByte = in.read();
 				
 			}
 				
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public static void encodeHC1SR(int key, String path) throws NoSuchAlgorithmException{
 		
+		SecureRandom sr = SecureRandom.getInstanceStrong(); //new SecureRandom(key);
 		
-		
-		
-		
+		try(InputStream in = new FileInputStream(path); 
+				OutputStream out = new FileOutputStream(Helpers.createOutputPath(path, "_HC1SR"))){
+			
+			
+			int nextByte = in.read();
+			while(nextByte >= 0) {
+				
+				out.write(nextByte ^ sr.nextInt());
+				nextByte = in.read();
+				
+			}
+				
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
