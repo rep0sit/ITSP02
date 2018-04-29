@@ -39,8 +39,6 @@ public final class TripleDES {
 	private static byte[] key3 = new byte[8];
 	private static byte[] iv = new byte[8];
 	
-	
-	
 	private TripleDES() {
 	}
 	
@@ -167,10 +165,11 @@ public final class TripleDES {
 	private static void readKeyIVFromFile(String keyFile) {
 		try {
 			FileInputStream in = new FileInputStream(keyFile);
-			in.read(key1, 1, 8);
-			in.read(key2, 9, 16);
-			in.read(key3, 17, 24);
-			in.read(iv, 25,32);
+					
+			in.read(key1, 0, 7);
+			in.read(key2, 0, 7);
+			in.read(key3, 0, 7);
+			in.read(iv, 0,7);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
