@@ -51,6 +51,11 @@ public final class TripleDES {
 
 =======
 		
+		String inFile = args[0];
+		String keyFile = args[1];
+		String outFile = args[2];
+		String crypt = args[3];
+		
 		
 >>>>>>> precond fuer main in TripleDES
 	}
