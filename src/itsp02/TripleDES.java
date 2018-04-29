@@ -1,8 +1,5 @@
 package itsp02;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 /**
  * @author Etienne Onasch
  * @author Nelli Welker
@@ -13,6 +10,7 @@ public final class TripleDES {
 	private static byte[] key1 = new byte[8];
 	private static byte[] key2 = new byte[8];
 	private static byte[] key3 = new byte[8];
+	private static byte[] iv = new byte[8];
 	
 	
 	
@@ -41,7 +39,7 @@ public final class TripleDES {
 		DES des2 = new DES(key2);
 		DES des3 = new DES(key3);
 		
-		byte[] first = new byte[8];
+		byte[] first = new byte[8]; 
 		byte[] second = new byte[8];
 		
 		des3.decrypt(source, 0, first, 0);
