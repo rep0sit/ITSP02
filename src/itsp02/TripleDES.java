@@ -10,14 +10,16 @@ public final class TripleDES {
 	private static byte[] key2 = new byte[8];
 	private static byte[] key3 = new byte[8];
 	
-	private static DES des1 = new DES(key1);
-	private static DES des2 = new DES(key2);
-	private static DES des3 = new DES(key3);
+	
 	
 	private TripleDES() {
 	}
 	
 	private static void encrypt(byte[]source, byte[]target) {
+		
+		DES des1 = new DES(key1);
+		DES des2 = new DES(key2);
+		DES des3 = new DES(key3);
 		
 		byte[] first = new byte[8];
 		byte[] second = new byte[8];
@@ -30,6 +32,10 @@ public final class TripleDES {
 	
 	
 	private static void decrypt(byte[]source, byte[]target) {
+		
+		DES des1 = new DES(key1);
+		DES des2 = new DES(key2);
+		DES des3 = new DES(key3);
 		
 		byte[] first = new byte[8];
 		byte[] second = new byte[8];
