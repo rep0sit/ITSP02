@@ -15,7 +15,6 @@ import java.io.OutputStream;
  *
  */
 public class HC1 {
-	
 
 	public static void main(String...args) {
 		int key = 0;
