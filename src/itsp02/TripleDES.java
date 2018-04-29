@@ -47,7 +47,12 @@ public final class TripleDES {
 					+ " 2. A keyfile with 3 Keys and one init vector, "
 					+ "3. output file name and 4. \"encrypt\" | \"decrypt\" (w/o marks)");
 		}
+<<<<<<< HEAD
 
+=======
+		
+		
+>>>>>>> precond fuer main in TripleDES
 	}
 	
 	
