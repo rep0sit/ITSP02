@@ -35,13 +35,15 @@ public final class TripleDES {
 	private static final String ENCRYPT = "encrypt";
 	private static final String DECRYPT = "decrypt";
 	
+	private static final int BLOCK_SIZE = 8;
+	
 	private static int inFileLen = 0;
 	
 	
-	private static byte[] key1 = new byte[8];
-	private static byte[] key2 = new byte[8];
-	private static byte[] key3 = new byte[8];
-	private static byte[] iv = new byte[8];
+	private static byte[] key1 = new byte[BLOCK_SIZE];
+	private static byte[] key2 = new byte[BLOCK_SIZE];
+	private static byte[] key3 = new byte[BLOCK_SIZE];
+	private static byte[] iv = new byte[BLOCK_SIZE];
 	
 	private TripleDES() {
 	}
@@ -81,8 +83,8 @@ public final class TripleDES {
 		DES des2 = new DES(key2);
 		DES des3 = new DES(key3);
 		
-		byte[] first = new byte[8]; 
-		byte[] second = new byte[8];
+		byte[] first = new byte[BLOCK_SIZE]; 
+		byte[] second = new byte[BLOCK_SIZE];
 		
 		if(crypt.equals(ENCRYPT)) {
 			des1.encrypt(source, 0, first, 0);
@@ -183,10 +185,10 @@ public final class TripleDES {
 		
 		try(FileInputStream in = new FileInputStream(keyFile)) {
 					
-			in.read(key1, 0, 8);
-			in.read(key2, 0, 8);
-			in.read(key3, 0, 8);
-			in.read(iv, 0,8);
+			in.read(key1, 0, BLOCK_SIZE);
+			in.read(key2, 0, BLOCK_SIZE);
+			in.read(key3, 0, BLOCK_SIZE);
+			in.read(iv, 0, BLOCK_SIZE);
 			
 			System.out.println("From " + keyFile + ":");
 			System.out.println("key1: " + Arrays.toString(key1));
