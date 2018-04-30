@@ -146,20 +146,24 @@ public final class TripleDES {
 			
 			byte[] buffer = new byte[BLOCK_SIZE];
 			int len;
+		
+			
 			while((len = in.read(buffer)) > 0) {
 				
 				inFileLen += len;
 
-				
+	
 				result = new byte[BLOCK_SIZE];
 				tripleDES(currentChiffre, result, crypt);
 			
 				xor(result, buffer, currentChiffre);
 				
-				out.write(currentChiffre, 0, len);
+				//out.write(currentChiffre, 0, len);
+				out.write(currentChiffre);
 				
 				
 			}
+		
 			
 			System.out.println("\nLength of " + inFile + ": " + inFileLen + " Bytes");
 			
