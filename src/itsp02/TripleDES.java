@@ -144,14 +144,14 @@ public final class TripleDES {
 		try(InputStream in = new FileInputStream(inFile); 
 				OutputStream out = new FileOutputStream(outFile)){
 			
-			byte[] buffer = new byte[8];
+			byte[] buffer = new byte[BLOCK_SIZE];
 			int len;
 			while((len = in.read(buffer)) > 0) {
 				
 				inFileLen += len;
 
 				
-				result = new byte[8];
+				result = new byte[BLOCK_SIZE];
 				tripleDES(currentChiffre, result, crypt);
 			
 				xor(result, buffer, currentChiffre);
