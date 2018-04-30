@@ -22,24 +22,24 @@ public class HC1Test {
 	@Test
 	public void testFileContents() throws IOException {
 //		HC1 hc1 = new HC1();
-//		HC1.encodeHC1(9, "textB.txt");
-//		HC1.encodeHC1(9, "textB.txt_HC1.txt_HC1.txt");
+//		HC1.encodeHC1(9, "E:/Nelli/HAW/textB.txt");
+//		HC1.encodeHC1(9, "E:/Nelli/HAW/textB.txt_HC1.txt_HC1.txt");
 		
-		assertEquals(new String(Files.readAllBytes(Paths.get("textB.txt")), StandardCharsets.UTF_8), 
-				new String(Files.readAllBytes(Paths.get("textB.txt_HC1.txt_HC1.txt")), StandardCharsets.UTF_8));
+		assertEquals(new String(Files.readAllBytes(Paths.get("E:/Nelli/HAW/textB.txt")), StandardCharsets.UTF_8), 
+				new String(Files.readAllBytes(Paths.get("E:/Nelli/HAW/textB.txt_HC1.txt_HC1.txt")), StandardCharsets.UTF_8));
 
-		assertNotEquals(new String(Files.readAllBytes(Paths.get("textB.txt")), StandardCharsets.UTF_8), 
-				new String(Files.readAllBytes(Paths.get("textB.txt_HC1.txt_HC2.txt")), StandardCharsets.UTF_8));
+		assertNotEquals(new String(Files.readAllBytes(Paths.get("E:/Nelli/HAW/textB.txt")), StandardCharsets.UTF_8), 
+				new String(Files.readAllBytes(Paths.get("E:/Nelli/HAW/textB.txt_HC1.txt_HC1.txt_HC2.txt")), StandardCharsets.UTF_8));
 
 	}
 	
 	@Test
 	public void testFileContentsSecureRandom() throws IOException{
-//		HC1.encodeHC1SR("textB.txt");
-//		HC1.encodeHC1SR("textB.txt_HC1SR.txt");
+//		HC1.encodeHC1SR("E:/Nelli/HAW/textB.txt");
+//		HC1.encodeHC1SR("E:/Nelli/HAW/textB.txt_HC1SR.txt");
 		
-//		assertEquals(new String(Files.readAllBytes(Paths.get("textB.txt")), StandardCharsets.UTF_8), 
-//				new String(Files.readAllBytes(Paths.get("textB.txt_HC1SR.txt_HC1SR.txt"))), StandardCharsets.UTF_8);
+//		assertEquals(new String(Files.readAllBytes(Paths.get("E:/Nelli/HAW/textB.txt")), StandardCharsets.UTF_8), 
+//				new String(Files.readAllBytes(Paths.get("E:/Nelli/HAW/textB.txt_HC1SR.txt_HC1SR.txt"))), StandardCharsets.UTF_8);
 	}
 
 }
