@@ -6,8 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
+
+import javax.crypto.KeyGenerator;
 
 
 /**
@@ -36,12 +40,12 @@ public class HC1 {
 			throw new IllegalArgumentException("The first value must be an integer value!");
 			
 		}
-		encodeHC1(key,path);
-//		try {
-//			encodeHC1SR(key,path);
-//		} catch (NoSuchAlgorithmException e) {
-//			e.printStackTrace();
-//		}
+//		encodeHC1(key,path);
+		try {
+			encodeHC1SR(key,path);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void encodeHC1(int key, String path){
@@ -67,17 +71,20 @@ public class HC1 {
 		}
 	}
 	public static void encodeHC1SR(int key, String path) throws NoSuchAlgorithmException{
+		byte[] seed = String.format("%d", key).getBytes();
 		
-		SecureRandom sr = SecureRandom.getInstanceStrong(); //new SecureRandom(key);
+		SecureRandom sr = new SecureRandom();
+		sr.setSeed(seed);
 		
 		try(InputStream in = new FileInputStream(path); 
 				OutputStream out = new FileOutputStream(Helpers.createOutputPath(path, "_HC1SR"))){
 			
-			
+//			sr.nextBytes(seed);
+//			System.out.println(Arrays.toString(seed));
+
 			int nextByte = in.read();
 			while(nextByte >= 0) {
-				
-				out.write(nextByte ^ sr.nextInt(key));
+				out.write(nextByte ^ sr.nextInt());
 				nextByte = in.read();
 				
 			}
