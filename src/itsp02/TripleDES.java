@@ -147,14 +147,14 @@ public final class TripleDES {
 			while((len = in.read(buffer)) > 0) {
 				
 				inFileLen += len;
-				int bufferSize = buffer.length;
+
 				
 				result = new byte[8];
 				tripleDES(currentChiffre, result, crypt);
 			
 				xor(result, buffer, currentChiffre);
 				
-				out.write(currentChiffre, 0, bufferSize);
+				out.write(currentChiffre, 0, len);
 				
 				
 			}
