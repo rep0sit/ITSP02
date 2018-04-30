@@ -77,7 +77,7 @@ public final class TripleDES {
 	 * @param target
 	 * @param crypt
 	 */
-	private static void tripleDES(byte[]source, byte[]target, String crypt) {
+	private static void tripleDES(byte[]source, byte[]target) {
 		
 		DES des1 = new DES(key1);
 		DES des2 = new DES(key2);
@@ -139,7 +139,7 @@ public final class TripleDES {
 		
 		
 		// Cipher Feedback
-		byte[] currentChiffre = iv;
+		byte[] outPut = iv;
 		byte[] result;
 		
 		try(InputStream in = new FileInputStream(inFile); 
@@ -147,19 +147,27 @@ public final class TripleDES {
 			
 			byte[] buffer = new byte[BLOCK_SIZE];
 			int len;
-		
+			result = new byte[BLOCK_SIZE];
+			
+			tripleDES(outPut, result);
+			
 			
 			while((len = in.read(buffer)) > 0) {
 				
 				inFileLen += len;
 
-	
-				result = new byte[BLOCK_SIZE];
-				tripleDES(currentChiffre, result, crypt);
-			
-				xor(result, buffer, currentChiffre);
+				xor(result, buffer, outPut);
 				
-				out.write(currentChiffre, 0, len);
+				out.write(outPut, 0, len);
+				
+				
+				if(crypt.equals(ENCRYPT)) {
+					tripleDES(outPut, result);
+				}else {
+					tripleDES(buffer, result);
+				}
+		
+				
 				//out.write(currentChiffre);
 				
 				
