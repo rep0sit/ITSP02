@@ -148,8 +148,7 @@ public final class TripleDES {
 				result = new byte[8];
 				tripleDES(currentChiffre, result, crypt);
 				
-//				DES.writeBytes(DES.makeLong(result, 0, result.length) ^ DES.makeLong(buffer, 0, buffer.length), 
-//						currentChiffre, 0, currentChiffre.length);
+				
 				
 				xor(result, buffer, currentChiffre);
 				
@@ -176,7 +175,7 @@ public final class TripleDES {
 
 	/**
 	 * Reading key1,key2,key3 and the iv from the keyfile and
-	 * storing intoe the variables.
+	 * storing into the variables.
 	 * 
 	 * @param keyFile
 	 */
@@ -214,9 +213,12 @@ public final class TripleDES {
 			throw new IllegalArgumentException("All byte Arrays must be of same length!");
 		}
 
-		for (int i = 0; i < aLen; i++) {
-			dest[i] = (byte) (first[i] ^ second[i]);
-		}
+//		for (int i = 0; i < aLen; i++) {
+//			dest[i] = (byte) (first[i] ^ second[i]);
+//		}
+		
+		DES.writeBytes(DES.makeLong(first, 0, aLen) ^ DES.makeLong(second, 0, aLen), 
+				dest, 0, aLen);
 		
 		
 		
