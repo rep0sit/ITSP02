@@ -35,7 +35,7 @@ public final class TripleDES {
 	private static final String ENCRYPT = "encrypt";
 	private static final String DECRYPT = "decrypt";
 	
-	private static int fileLen = 0;
+	private static int inFileLen = 0;
 	
 	
 	private static byte[] key1 = new byte[8];
@@ -141,22 +141,26 @@ public final class TripleDES {
 			
 			byte[] buffer = new byte[8];
 			int len;
-			while((len = in.read(buffer)) >= 0) {
+			while((len = in.read(buffer)) > 0) {
 				
-				fileLen += len;
+				inFileLen += len;
 				
 				result = new byte[8];
 				tripleDES(currentChiffre, result, crypt);
 				
-				DES.writeBytes(DES.makeLong(result, 0, result.length) ^ DES.makeLong(buffer, 0, buffer.length), 
-						currentChiffre, 0, currentChiffre.length);
+//				DES.writeBytes(DES.makeLong(result, 0, result.length) ^ DES.makeLong(buffer, 0, buffer.length), 
+//						currentChiffre, 0, currentChiffre.length);
+				
+				xor(result, buffer, currentChiffre);
+				
+				
 				
 				out.write(currentChiffre);
 				
 				
 			}
 			
-			System.out.println("\nLength of " + inFile + ": " + fileLen + " Bytes");
+			System.out.println("\nLength of " + inFile + ": " + inFileLen + " Bytes");
 			
 			
 			
@@ -199,6 +203,24 @@ public final class TripleDES {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	private static void xor(byte[] first, byte[] second, byte[] dest) {
+
+		// Prec
+		int aLen = first.length;
+		if (second.length != aLen || dest.length != aLen) {
+			throw new IllegalArgumentException("All byte Arrays must be of same length!");
+		}
+
+		for (int i = 0; i < aLen; i++) {
+			dest[i] = (byte) (first[i] ^ second[i]);
+		}
+		
+		
+		
+		
 	}
 	
 	
