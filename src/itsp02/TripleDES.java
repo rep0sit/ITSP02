@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 /**
  * 
@@ -33,6 +34,9 @@ public final class TripleDES {
 	
 	private static final String ENCRYPT = "encrypt";
 	private static final String DECRYPT = "decrypt";
+	
+	private static int fileLen = 0;
+	
 	
 	private static byte[] key1 = new byte[8];
 	private static byte[] key2 = new byte[8];
@@ -113,7 +117,14 @@ public final class TripleDES {
 		String outFile = args[2];
 		String crypt = args[3];
 		
-		if(!crypt.equals(ENCRYPT) || !crypt.equals(DECRYPT)){
+		
+		System.out.println("\nFirst arg (input-file): " + inFile);
+		System.out.println("Second arg (key-file): " + keyFile);
+		System.out.println("Third arg (output-file): " + outFile);
+		System.out.println("Fourth arg (" + ENCRYPT + " | " + DECRYPT + "): " + crypt + "\n");
+		
+		
+		if(!crypt.equals(ENCRYPT) && !crypt.equals(DECRYPT)){
 			throw new IllegalArgumentException("4th argument must be \""+ ENCRYPT +"\" or \""+ DECRYPT +"\"");
 		}
 		
@@ -129,8 +140,10 @@ public final class TripleDES {
 				OutputStream out = new FileOutputStream(outFile)){
 			
 			byte[] buffer = new byte[8];
-			
-			while(in.read(buffer) >= 0) {
+			int len;
+			while((len = in.read(buffer)) >= 0) {
+				
+				fileLen += len;
 				
 				result = new byte[8];
 				tripleDES(currentChiffre, result, crypt);
@@ -139,9 +152,11 @@ public final class TripleDES {
 						currentChiffre, 0, currentChiffre.length);
 				
 				out.write(currentChiffre);
+				
+				
 			}
 			
-			
+			System.out.println("\nLength of " + inFile + ": " + fileLen + " Bytes");
 			
 			
 			
@@ -162,13 +177,22 @@ public final class TripleDES {
 	 * @param keyFile
 	 */
 	private static void readKeyIVFromFile(String keyFile) {
-		try {
-			FileInputStream in = new FileInputStream(keyFile);
+		
+		try(FileInputStream in = new FileInputStream(keyFile)) {
 					
-			in.read(key1, 0, 7);
-			in.read(key2, 0, 7);
-			in.read(key3, 0, 7);
-			in.read(iv, 0,7);
+			in.read(key1, 0, 8);
+			in.read(key2, 0, 8);
+			in.read(key3, 0, 8);
+			in.read(iv, 0,8);
+			
+			System.out.println("From " + keyFile + ":");
+			System.out.println("key1: " + Arrays.toString(key1));
+			System.out.println("key2: " + Arrays.toString(key2));
+			System.out.println("key3: " + Arrays.toString(key3));
+			System.out.println("init vector: " + Arrays.toString(iv));
+			
+			
+
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
