@@ -86,24 +86,25 @@ public final class TripleDES {
 		byte[] first = new byte[BLOCK_SIZE]; 
 		byte[] second = new byte[BLOCK_SIZE];
 		
-		if(crypt.equals(ENCRYPT)) {
-			des1.encrypt(source, 0, first, 0);
-			des2.decrypt(first, 0, second, 0);
-			des3.encrypt(second, 0, target, 0);
-			
-			
-		}
+		//if(crypt.equals(ENCRYPT)) {
 		
-		else if(crypt.equals(DECRYPT)) {
+		des1.encrypt(source, 0, first, 0);
+		des2.decrypt(first, 0, second, 0);
+		des3.encrypt(second, 0, target, 0);
 			
-			des3.decrypt(source, 0, first, 0);
-			des2.encrypt(first, 0, second, 0);
-			des1.decrypt(second, 0, target, 0);
 			
-		}
-		else {
-			throw new IllegalArgumentException("Argument crypt must be \""+ ENCRYPT + "\" or \"" + DECRYPT + "\"");
-		}
+		//}
+		
+//		else if(crypt.equals(DECRYPT)) {
+//			
+//			des3.decrypt(source, 0, first, 0);
+//			des2.encrypt(first, 0, second, 0);
+//			des1.decrypt(second, 0, target, 0);
+//			
+//		}
+//		else {
+//			throw new IllegalArgumentException("Argument crypt must be \""+ ENCRYPT + "\" or \"" + DECRYPT + "\"");
+//		}
 		
 		
 		
@@ -158,8 +159,8 @@ public final class TripleDES {
 			
 				xor(result, buffer, currentChiffre);
 				
-				//out.write(currentChiffre, 0, len);
-				out.write(currentChiffre);
+				out.write(currentChiffre, 0, len);
+				//out.write(currentChiffre);
 				
 				
 			}
@@ -219,13 +220,13 @@ public final class TripleDES {
 			throw new IllegalArgumentException("All byte Arrays must be of same length!");
 		}
 
-		for (int i = 0; i < aLen; i++) {
-			dest[i] = (byte) (first[i] ^ second[i]);
-		}
+//		for (int i = 0; i < aLen; i++) {
+//			dest[i] = (byte) (first[i] ^ second[i]);
+//		}
 		
-//		DES.writeBytes(DES.makeLong(first, 0, aLen) ^ DES.makeLong(second, 0, aLen), 
-//				dest, 0, aLen);
-//		
+		DES.writeBytes(DES.makeLong(first, 0, aLen) ^ DES.makeLong(second, 0, aLen), 
+				dest, 0, aLen);
+		
 		
 		
 		

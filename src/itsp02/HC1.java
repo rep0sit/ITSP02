@@ -46,7 +46,7 @@ public class HC1 {
 	
 	public static void encodeHC1(int key, String path){
 		LCG lcg = new LCG(key);
-//		SecureRandom sr = new SecureRandom();
+
 		
 		try(InputStream in = new FileInputStream(path); 
 				OutputStream out = new FileOutputStream(Helpers.createOutputPath(path, "_HC1"))){
@@ -56,7 +56,6 @@ public class HC1 {
 			while(nextByte >= 0) {
 				
 				out.write(nextByte ^ lcg.nextInt());
-//				out.write(nextByte ^ sr.nextInt());
 				nextByte = in.read();
 				
 			}
